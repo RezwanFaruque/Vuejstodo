@@ -1,11 +1,23 @@
 <template>
    <div class="text-center">
      <h1>This is modern todo app</h1>
-     <div v-for="todo in todos" :key="todo.id">
-        <div :class="{complete:todo.complete}">
-          <input v-on:click="toggletodo(todo.id)" type="checkbox" name="todoname" id="todoname" v-model="todo.complete">
-           {{todo.name}}
-          </div>
+     <form>
+        <div v-for="todo in todos" :key="todo.id">
+            <div :class="{complete:todo.complete}">
+              <input type="checkbox" name="todoname" id="todoname" v-model="todo.complete">
+              {{todo.name}}
+            </div>
+        </div>
+     </form>
+     
+
+     <h1>Add To</h1>
+     <div>
+       <form @submit.prevent="addtodo">
+          <input type="text" name="todo" v-model="addtodoname">
+          <button type="submit">add todo</button>
+       </form>
+       
      </div>
    </div>
 </template>
@@ -16,6 +28,9 @@ export default {
   data(){
 
     return{
+      addtodoname:'',
+      addtodocomplete: false,
+      time: '2 hours',
       todos:[
         {
           id: 1,
@@ -54,8 +69,23 @@ export default {
   },
 
   methods:{
-    toggletodo(index){
-      this.todos[index].splice(index,1);
+    addtodo(){
+      let totaltodo = this.todos.length;
+
+     const toid = totaltodo + 1;
+
+      if(this.addtodoname != ''){
+        this.todos.push({
+          id: toid,
+          name: this.addtodoname,
+          complete: this.addtodocomplete,
+          time: this.time,
+
+        })
+      }
+
+      this.addtodoname = '';
+      
     }
   }
 }
