@@ -1,11 +1,7 @@
 <template>
   <div id="app">
     <!-- all todo goes here -->
-    <Todo
-      
-
-    
-    />
+    <Todo />
   </div>
 </template>
 

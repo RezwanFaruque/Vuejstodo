@@ -1,12 +1,15 @@
 <template>
    <div class="text-center">
      <h1>This is modern todo app</h1>
-     <form>
+     <form @submit.prevent>
         <div v-for="todo in todos" :key="todo.id">
             <div :class="{complete:todo.complete}">
               <input type="checkbox" name="todoname" id="todoname" v-model="todo.complete">
               {{todo.name}}
+              <button v-on:click="deletetodo(todo.id)" >Delete</button>
             </div>
+
+            
         </div>
      </form>
      
@@ -86,7 +89,13 @@ export default {
 
       this.addtodoname = '';
       
-    }
+    },
+
+  deletetodo(index){
+    let id = index-1
+    this.todos.splice(id,1);
+  }
+    
   }
 }
 </script>
